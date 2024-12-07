@@ -3,22 +3,16 @@ import type { Provider } from '@supabase/supabase-js';
 import { supabase } from '~/lib/db';
 import { component$, $, useSignal, useStore } from '@builder.io/qwik';
 
+const SITE_URL = import.meta.env.VITE_SITE_URL
 
 const getURL = () => {
-  const _env = import.meta.env
-  
   // https://vercel.com/docs/projects/environment-variables/system-environment-variables#VERCEL_URL
-  let url =
-    _env?.VITE_VERCEL_URL ?? // Automatically set by Vercel.
+  let url = SITE_URL ?? // Automatically set by Vercel.
     'http://localhost:3000/'
   // Make sure to include `https://` when not localhost.
   url = url.startsWith('http') ? url : `https://${url}`
   // Make sure to include a trailing `/`.
   url = url.endsWith('/') ? url : `${url}/`
-
-
-  console.log('REDIRECTING TO: import.meta', _env?.VITE_VERCEL_URL)
-  console.log('REDIRECTING TO:', url)
 
   return url
 }
@@ -28,15 +22,11 @@ interface HelperText {
   text: string | null;
 }
 
+
 export const Auth = component$(() => {
   const emailSignal = useSignal('');
   const passwordSignal = useSignal('');
   const helperTextStore = useStore<HelperText>({ error: null, text: null });
-  const redirectTo = getURL()
-
-  console.log('import.meta.env', import.meta?.env)
-  console.log('VITE_VERCEL_URL', import.meta?.env?.VITE_VERCEL_URL)
-  console.log('redirectTo', redirectTo)
 
   const handleLogin = $(async (type: 'LOGIN' | 'REGISTER' | unknown) => {
     const {
@@ -63,9 +53,10 @@ export const Auth = component$(() => {
   });
 
   const handleOAuthLogin = $(async (provider: Provider) => {
+    const redirectTo = getURL()
     // You need to enable the third party auth you want in Authentication > Settings
     // Read more on: https://supabase.com/docs/guides/auth#third-party-logins
-    const { error } = await supabase.auth.signInWithOAuth({ provider, options: { redirectTo: redirectTo } });
+    const { error } = await supabase.auth.signInWithOAuth({ provider, options: { redirectTo } });
     if (error) console.log('Error: ', error.message);
   });
 
