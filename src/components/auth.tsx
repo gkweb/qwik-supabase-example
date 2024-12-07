@@ -3,6 +3,17 @@ import type { Provider } from '@supabase/supabase-js';
 import { supabase } from '~/lib/db';
 import { component$, $, useSignal, useStore } from '@builder.io/qwik';
 
+const getURL = () => {
+  let url =
+    process?.env?.NEXT_PUBLIC_VERCEL_URL ?? // Automatically set by Vercel.
+    'http://localhost:3000/'
+  // Make sure to include `https://` when not localhost.
+  url = url.startsWith('http') ? url : `https://${url}`
+  // Make sure to include a trailing `/`.
+  url = url.endsWith('/') ? url : `${url}/`
+  return url
+}
+
 interface HelperText {
   error: boolean | null;
   text: string | null;
@@ -38,9 +49,10 @@ export const Auth = component$(() => {
   });
 
   const handleOAuthLogin = $(async (provider: Provider) => {
+    console.log('redirect to', { options: { redirectTo: getURL() } })
     // You need to enable the third party auth you want in Authentication > Settings
     // Read more on: https://supabase.com/docs/guides/auth#third-party-logins
-    const { error } = await supabase.auth.signInWithOAuth({ provider });
+    const { error } = await supabase.auth.signInWithOAuth({ provider, options: { redirectTo: getURL() } });
     if (error) console.log('Error: ', error.message);
   });
 
