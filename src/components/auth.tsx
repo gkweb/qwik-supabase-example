@@ -3,7 +3,7 @@ import type { Provider } from '@supabase/supabase-js';
 import { supabase } from '~/lib/db';
 import { component$, $, useSignal, useStore } from '@builder.io/qwik';
 
-const SITE_URL = import.meta.env.VITE_SITE_URL
+const SITE_URL = process?.env?.VERCEL_PROJECT_PRODUCTION_URL ?? import.meta.env.VITE_SITE_URL
 // eslint-disable-next-line no-debugger
 debugger
 
