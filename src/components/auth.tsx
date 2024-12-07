@@ -4,21 +4,8 @@ import { supabase } from '~/lib/db';
 import { component$, $, useSignal, useStore } from '@builder.io/qwik';
 
 
-interface HelperText {
-  error: boolean | null;
-  text: string | null;
-}
-
-export const Auth = component$(() => {
-  const emailSignal = useSignal('');
-  const passwordSignal = useSignal('');
-  const helperTextStore = useStore<HelperText>({ error: null, text: null });
-
-
 const getURL = () => {
-
   const _env = import.meta.env
-  
   
   // https://vercel.com/docs/projects/environment-variables/system-environment-variables#VERCEL_URL
   let url =
@@ -35,6 +22,16 @@ const getURL = () => {
 
   return url
 }
+
+interface HelperText {
+  error: boolean | null;
+  text: string | null;
+}
+
+export const Auth = component$(() => {
+  const emailSignal = useSignal('');
+  const passwordSignal = useSignal('');
+  const helperTextStore = useStore<HelperText>({ error: null, text: null });
 
   console.log(import.meta.env?.VITE_VERCEL_URL)
 
@@ -63,7 +60,6 @@ const getURL = () => {
   });
 
   const handleOAuthLogin = $(async (provider: Provider) => {
-    console.log('redirect to', { options: { redirectTo: getURL() } })
     // You need to enable the third party auth you want in Authentication > Settings
     // Read more on: https://supabase.com/docs/guides/auth#third-party-logins
     const { error } = await supabase.auth.signInWithOAuth({ provider, options: { redirectTo: getURL() } });
