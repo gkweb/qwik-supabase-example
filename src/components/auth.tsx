@@ -64,7 +64,10 @@ export const Auth = component$(() => {
     console.error('Redirecting to: ', redirectTo)
     // You need to enable the third party auth you want in Authentication > Settings
     // Read more on: https://supabase.com/docs/guides/auth#third-party-logins
-    const { error } = await supabase.auth.signInWithOAuth({ provider, options: { redirectTo } });
+    const { error } = await supabase.auth.signInWithOAuth({ 
+      provider, 
+      options: { redirectTo } 
+    });
     if (error) console.log('Error: ', error.message);
   });
 
