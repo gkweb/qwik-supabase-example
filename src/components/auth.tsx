@@ -60,8 +60,8 @@ export const Auth = component$(() => {
 
   const handleOAuthLogin = $(async (provider: Provider) => {
     const redirectTo = getURL()
-    console.log('SITE_URL', SITE_URL)
-    console.log('Redirecting to: ', redirectTo)
+    console.error('SITE_URL', SITE_URL)
+    console.error('Redirecting to: ', redirectTo)
     // You need to enable the third party auth you want in Authentication > Settings
     // Read more on: https://supabase.com/docs/guides/auth#third-party-logins
     const { error } = await supabase.auth.signInWithOAuth({ provider, options: { redirectTo } });
