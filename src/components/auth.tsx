@@ -3,6 +3,18 @@ import type { Provider } from '@supabase/supabase-js';
 import { supabase } from '~/lib/db';
 import { component$, $, useSignal, useStore } from '@builder.io/qwik';
 
+
+interface HelperText {
+  error: boolean | null;
+  text: string | null;
+}
+
+export const Auth = component$(() => {
+  const emailSignal = useSignal('');
+  const passwordSignal = useSignal('');
+  const helperTextStore = useStore<HelperText>({ error: null, text: null });
+
+
 const getURL = () => {
 
   const _env = import.meta.env
@@ -24,17 +36,7 @@ const getURL = () => {
   return url
 }
 
-interface HelperText {
-  error: boolean | null;
-  text: string | null;
-}
-
-export const Auth = component$(() => {
-  const emailSignal = useSignal('');
-  const passwordSignal = useSignal('');
-  const helperTextStore = useStore<HelperText>({ error: null, text: null });
-
-  console.log(import.meta.env?.VERCEL_URL)
+  console.log(import.meta.env?.VITE_VERCEL_URL)
 
   const handleLogin = $(async (type: 'LOGIN' | 'REGISTER' | unknown) => {
     const {
