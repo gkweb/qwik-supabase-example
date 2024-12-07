@@ -118,7 +118,7 @@ export const Auth = component$(() => {
           </div>
 
           <div>
-            <div class="mt-3">
+            {/* <div class="mt-3">
               <span class="block rounded-md shadow-sm">
                 <button
                   onClick$={() => handleOAuthLogin('github')}
@@ -128,8 +128,8 @@ export const Auth = component$(() => {
                   GitHub
                 </button>
               </span>
-            </div>
-            {/* <div class="mt-3">
+            </div> */}
+            <div class="mt-3">
             <span class="block rounded-md shadow-sm">
               <button
                 onClick$={() => handleOAuthLogin('google')}
@@ -139,7 +139,7 @@ export const Auth = component$(() => {
                 Google
               </button>
             </span>
-          </div> */}
+          </div>
           </div>
         </div>
       </div>

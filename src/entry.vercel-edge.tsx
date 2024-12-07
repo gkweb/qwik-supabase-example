@@ -3,6 +3,8 @@ import qwikCityPlan from '@qwik-city-plan';
 import { manifest } from '@qwik-client-manifest';
 import render from './entry.ssr';
 
+export const runtime = 'edge';
+
 declare global {
   interface QwikCityPlatform extends PlatformVercel {}
 }
