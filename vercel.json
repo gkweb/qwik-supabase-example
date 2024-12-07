@@ -1,5 +1,4 @@
 {
-  "runtime": "edge",
   "headers": [
     {
       "source": "/build/(.*)",
