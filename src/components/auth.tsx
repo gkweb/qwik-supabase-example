@@ -4,6 +4,8 @@ import { supabase } from '~/lib/db';
 import { component$, $, useSignal, useStore } from '@builder.io/qwik';
 
 const SITE_URL = import.meta.env.VITE_SITE_URL
+// eslint-disable-next-line no-debugger
+debugger
 
 const getURL = () => {
   // https://vercel.com/docs/projects/environment-variables/system-environment-variables#VERCEL_URL
