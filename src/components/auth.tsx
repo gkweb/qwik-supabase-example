@@ -59,14 +59,14 @@ export const Auth = component$(() => {
   });
 
   const handleOAuthLogin = $(async (provider: Provider) => {
-    const redirectTo = 'https://qwik-supabase-example-delta.vercel.app/' || getURL()
+    const redirectTo = getURL()
     console.error('SITE_URL', SITE_URL)
     console.error('Redirecting to: ', redirectTo)
     // You need to enable the third party auth you want in Authentication > Settings
     // Read more on: https://supabase.com/docs/guides/auth#third-party-logins
     const { error } = await supabase.auth.signInWithOAuth({ 
-      provider, 
-      options: { redirectTo } 
+      provider,
+      options: { redirectTo }
     });
     if (error) console.log('Error: ', error.message);
   });
