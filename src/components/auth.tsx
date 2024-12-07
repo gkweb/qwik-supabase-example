@@ -32,8 +32,11 @@ export const Auth = component$(() => {
   const emailSignal = useSignal('');
   const passwordSignal = useSignal('');
   const helperTextStore = useStore<HelperText>({ error: null, text: null });
+  const redirectTo = getURL()
 
-  console.log(import.meta.env?.VITE_VERCEL_URL)
+  console.log('import.meta.env', import.meta?.env)
+  console.log('VITE_VERCEL_URL', import.meta?.env?.VITE_VERCEL_URL)
+  console.log('redirectTo', redirectTo)
 
   const handleLogin = $(async (type: 'LOGIN' | 'REGISTER' | unknown) => {
     const {
@@ -62,7 +65,7 @@ export const Auth = component$(() => {
   const handleOAuthLogin = $(async (provider: Provider) => {
     // You need to enable the third party auth you want in Authentication > Settings
     // Read more on: https://supabase.com/docs/guides/auth#third-party-logins
-    const { error } = await supabase.auth.signInWithOAuth({ provider, options: { redirectTo: getURL() } });
+    const { error } = await supabase.auth.signInWithOAuth({ provider, options: { redirectTo: redirectTo } });
     if (error) console.log('Error: ', error.message);
   });
 
