@@ -3,13 +3,9 @@ import type { Provider } from '@supabase/supabase-js';
 import { supabase } from '~/lib/db';
 import { component$, $, useSignal, useStore } from '@builder.io/qwik';
 
-const SITE_URL = import.meta.env.BASE_URL ||
-process?.env?.VERCEL_PROJECT_PRODUCTION_URL ||
-import.meta.env.VITE_SITE_URL
-
 const getCurrentUrl = (): string => {
   const protocol = `${document.location.protocol}//`
-  return document.location.origin.split(protocol)?.[1] ?? SITE_URL
+  return document.location.origin.split(protocol)?.[1]
 }
 
 const getURL = () => {
@@ -60,14 +56,13 @@ export const Auth = component$(() => {
 
   const handleOAuthLogin = $(async (provider: Provider) => {
     const redirectTo = getURL()
-    console.error('SITE_URL', SITE_URL)
-    console.error('Redirecting to: ', redirectTo)
     // You need to enable the third party auth you want in Authentication > Settings
     // Read more on: https://supabase.com/docs/guides/auth#third-party-logins
-    const { error } = await supabase.auth.signInWithOAuth({ 
+    const { error } = await supabase.auth.signInWithOAuth({
       provider,
       options: { redirectTo }
     });
+
     if (error) console.log('Error: ', error.message);
   });
 
