@@ -4,6 +4,8 @@ import { supabase } from '~/lib/db';
 import { component$, $, useSignal, useStore } from '@builder.io/qwik';
 
 const getURL = () => {
+    console.log(import.meta.env)
+    debugger
   // https://vercel.com/docs/projects/environment-variables/system-environment-variables#VERCEL_URL
   let url =
     import.meta.env?.VERCEL_URL ?? // Automatically set by Vercel.
@@ -12,6 +14,8 @@ const getURL = () => {
   url = url.startsWith('http') ? url : `https://${url}`
   // Make sure to include a trailing `/`.
   url = url.endsWith('/') ? url : `${url}/`
+
+  debugger
   return url
 }
 
@@ -24,6 +28,8 @@ export const Auth = component$(() => {
   const emailSignal = useSignal('');
   const passwordSignal = useSignal('');
   const helperTextStore = useStore<HelperText>({ error: null, text: null });
+
+  console.log(import.meta.env?.VERCEL_URL)
 
   const handleLogin = $(async (type: 'LOGIN' | 'REGISTER' | unknown) => {
     const {
