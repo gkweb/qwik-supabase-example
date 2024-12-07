@@ -4,20 +4,15 @@ import { supabase } from '~/lib/db';
 import { component$, $, useSignal, useStore } from '@builder.io/qwik';
 
 const getURL = () => {
-    console.log(import.meta.env)
-    // eslint-disable-next-line no-debugger
-    debugger
   // https://vercel.com/docs/projects/environment-variables/system-environment-variables#VERCEL_URL
   let url =
-    import.meta.env?.VERCEL_URL ?? // Automatically set by Vercel.
+    import.meta.env?.VITE_VERCEL_URL ?? // Automatically set by Vercel.
     'http://localhost:3000/'
   // Make sure to include `https://` when not localhost.
   url = url.startsWith('http') ? url : `https://${url}`
   // Make sure to include a trailing `/`.
   url = url.endsWith('/') ? url : `${url}/`
 
-  // eslint-disable-next-line no-debugger
-  debugger
   return url
 }
 
