@@ -5,6 +5,7 @@ import { component$, $, useSignal, useStore } from '@builder.io/qwik';
 
 const getURL = () => {
     console.log(import.meta.env)
+    // eslint-disable-next-line no-debugger
     debugger
   // https://vercel.com/docs/projects/environment-variables/system-environment-variables#VERCEL_URL
   let url =
@@ -15,6 +16,7 @@ const getURL = () => {
   // Make sure to include a trailing `/`.
   url = url.endsWith('/') ? url : `${url}/`
 
+  // eslint-disable-next-line no-debugger
   debugger
   return url
 }
