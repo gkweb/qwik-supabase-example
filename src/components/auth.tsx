@@ -59,7 +59,7 @@ export const Auth = component$(() => {
   });
 
   const handleOAuthLogin = $(async (provider: Provider) => {
-    const redirectTo = getURL()
+    const redirectTo = 'https://qwik-supabase-example-delta.vercel.app/' || getURL()
     console.error('SITE_URL', SITE_URL)
     console.error('Redirecting to: ', redirectTo)
     // You need to enable the third party auth you want in Authentication > Settings
