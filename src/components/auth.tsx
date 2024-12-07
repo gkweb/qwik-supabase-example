@@ -5,7 +5,7 @@ import { component$, $, useSignal, useStore } from '@builder.io/qwik';
 
 const getURL = () => {
   let url =
-    process?.env?.NEXT_PUBLIC_VERCEL_URL ?? // Automatically set by Vercel.
+    import.meta.env?.NEXT_PUBLIC_VERCEL_URL ?? // Automatically set by Vercel.
     'http://localhost:3000/'
   // Make sure to include `https://` when not localhost.
   url = url.startsWith('http') ? url : `https://${url}`
