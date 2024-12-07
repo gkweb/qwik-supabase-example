@@ -4,14 +4,22 @@ import { supabase } from '~/lib/db';
 import { component$, $, useSignal, useStore } from '@builder.io/qwik';
 
 const getURL = () => {
+
+  const _env = import.meta.env
+  
+  
   // https://vercel.com/docs/projects/environment-variables/system-environment-variables#VERCEL_URL
   let url =
-    import.meta.env?.VITE_VERCEL_URL ?? // Automatically set by Vercel.
+    _env?.VITE_VERCEL_URL ?? // Automatically set by Vercel.
     'http://localhost:3000/'
   // Make sure to include `https://` when not localhost.
   url = url.startsWith('http') ? url : `https://${url}`
   // Make sure to include a trailing `/`.
   url = url.endsWith('/') ? url : `${url}/`
+
+
+  console.log('REDIRECTING TO: import.meta', _env?.VITE_VERCEL_URL)
+  console.log('REDIRECTING TO:', url)
 
   return url
 }
